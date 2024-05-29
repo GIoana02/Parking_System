@@ -11,15 +11,15 @@ reader = easyocr.Reader(['en'], gpu=False)
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Initialize Roboflow model
-rf = Roboflow(api_key="Q5w8ItvZkh3JcwKZ1Dku")
+rf = Roboflow(api_key="rf_Ya7naZBIzzdraBQpLRTN7QflcVC2")
 project = rf.workspace().project("license-plate-recognition-rxg4e")
 model = project.version(4).model
 
 # Perform inference on a local image
-result = model.predict("new1.jpg", confidence=40, overlap=30).json()
+result = model.predict("car1.jpg", confidence=40, overlap=30).json()
 
 # Load the image once to avoid reloading it in the loop
-image = Image.open("new1.jpg")  # Load the image using PIL
+image = Image.open("car1.jpg")  # Load the image using PIL
 image_cv = np.array(image)  # Convert PIL image to an array for OpenCV processing
 image_cv = cv2.cvtColor(image_cv, cv2.COLOR_RGB2BGR)  # Convert from RGB (PIL) to BGR (OpenCV)
 
