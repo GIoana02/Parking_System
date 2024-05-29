@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, Picker, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 
 const Reservation = () => {
-  // Sample data for car plate IDs and time slots
   const carPlateIds = ['ABC123', 'XYZ789', 'DEF456']; // Sample car plate IDs
   const timeSlots = ['10:00 AM - 12:00 PM', '12:00 PM - 02:00 PM', '02:00 PM - 04:00 PM']; // Sample time slots
 
-  const [selectedCarPlateId, setSelectedCarPlateId] = useState('');
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
+  const [selectedCarPlateId, setSelectedCarPlateId] = useState(carPlateIds[0]);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(timeSlots[0]);
 
   const handleReservation = () => {
-    // Implement reservation logic here
     console.log('Car Plate ID:', selectedCarPlateId);
     console.log('Time Slot:', selectedTimeSlot);
     // Add logic to save reservation data or navigate to confirmation screen
@@ -19,28 +18,32 @@ const Reservation = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Select Car Plate ID:</Text>
-      <Picker
-        selectedValue={selectedCarPlateId}
-        style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => setSelectedCarPlateId(itemValue)}
-      >
-        {carPlateIds.map((plateId, index) => (
-          <Picker.Item key={index} label={plateId} value={plateId} />
-        ))}
-      </Picker>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={selectedCarPlateId}
+          onValueChange={(itemValue) => setSelectedCarPlateId(itemValue)}
+          style={styles.picker}
+        >
+          {carPlateIds.map((plateId, index) => (
+            <Picker.Item key={index} label={plateId} value={plateId} />
+          ))}
+        </Picker>
+      </View>
 
       <Text style={styles.label}>Select Time Slot:</Text>
-      <Picker
-        selectedValue={selectedTimeSlot}
-        style={styles.picker}
-        onValueChange={(itemValue, itemIndex) => setSelectedTimeSlot(itemValue)}
-      >
-        {timeSlots.map((slot, index) => (
-          <Picker.Item key={index} label={slot} value={slot} />
-        ))}
-      </Picker>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={selectedTimeSlot}
+          onValueChange={(itemValue) => setSelectedTimeSlot(itemValue)}
+          style={styles.picker}
+        >
+          {timeSlots.map((slot, index) => (
+            <Picker.Item key={index} label={slot} value={slot} />
+          ))}
+        </Picker>
+      </View>
 
-      <Button title="Reserve" onPress={handleReservation} />
+      <Button title="Reserve" onPress={handleReservation} color="#9acd32" />
     </View>
   );
 };
@@ -59,13 +62,17 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 10,
   },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    marginBottom: 20,
+    width: '100%',
+    backgroundColor: 'white',
+  },
   picker: {
     height: 50,
     width: '100%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
-    backgroundColor: 'white',
   },
 });
 

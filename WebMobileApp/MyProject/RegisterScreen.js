@@ -47,7 +47,7 @@ const RegisterScreen = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
       />
-      <Button title="Register" onPress={handleRegister} />
+      <Button title="Register" onPress={handleRegister} color="#9acd32" />
     </View>
   );
 };
